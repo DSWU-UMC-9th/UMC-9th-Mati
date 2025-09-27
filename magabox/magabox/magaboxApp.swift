@@ -11,7 +11,7 @@ import SwiftUI
 struct magaboxApp: App {
     var body: some Scene {
         WindowGroup {
-            SplashView()
+            LoginView()
         }
     }
 }

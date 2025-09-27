@@ -8,6 +8,12 @@
 import SwiftUI
 
 struct LoginView: View {
+    @Bindable var viewModel: LoginViewModel = .init()
+    
+    @AppStorage("id") private var id: String = ""
+    @AppStorage("pwd") private var pwd: String = ""
+    @AppStorage("username") private var username: String = "" // 회원 정보 섹션에서 사용 (임시)
+ 
     var body: some View {
         VStack {
             Spacer().frame(height: 60)
@@ -44,10 +50,14 @@ struct LoginView: View {
         VStack(spacing: 17) {
             Button(action: {
                 print("로그인")
+                id = viewModel.userInfo.id
+                pwd = viewModel.userInfo.pwd
+                username = "김미주"
             }) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
-                        .frame(width: .infinity, height: 54)
+                        .frame(height: 54)
+                        .frame(maxWidth: .infinity)
                         .foregroundStyle(.purple03)
                     
                     Text("로그인")
@@ -91,7 +101,7 @@ struct LoginView: View {
     private var UmcGroup: some View {
         Image(.imgUmc)
             .resizable()
-            .frame(width: .infinity)
+            .frame(maxWidth: .infinity)
             .aspectRatio(contentMode: .fit)
 
     }
@@ -99,9 +109,17 @@ struct LoginView: View {
     // 컴포넌트
     private func textfield(title: String) -> some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(title)
-                .font(.medium16)
-                .foregroundStyle(.gray03)
+            if title == "아이디" {
+                TextField(title, text: $viewModel.userInfo.id)
+                    .font(.medium16)
+                    .foregroundStyle(.black)
+                    .textInputAutocapitalization(.never)
+            } else if title == "비밀번호" {
+                SecureField(title, text: $viewModel.userInfo.pwd)
+                    .font(.medium16)
+                    .foregroundStyle(.black)
+                    .textInputAutocapitalization(.never)
+            }
             Divider()
                 .background(.gray02)
         }
