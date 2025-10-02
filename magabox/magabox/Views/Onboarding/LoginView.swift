@@ -8,28 +8,34 @@
 import SwiftUI
 
 struct LoginView: View {
-    @Bindable var viewModel: LoginViewModel = .init()
+    @State var viewModel: LoginViewModel = .init()
+    @State private var isLoggedIn: Bool = false
     
     @AppStorage("id") private var id: String = ""
     @AppStorage("pwd") private var pwd: String = ""
     @AppStorage("username") private var username: String = "" // 회원 정보 섹션에서 사용 (임시)
  
     var body: some View {
-        VStack {
-            Spacer().frame(height: 60)
-            TitleGroup
-            Spacer()
-            TextfieldGroup
-            Spacer().frame(height: 75)
-            ButtonGroup
-            Spacer().frame(height: 35)
-            SocialLoginGroup
-            Spacer().frame(height: 39)
-            UmcGroup
-            Spacer().frame(height: 75)
+        NavigationStack {
+            VStack {
+                Spacer().frame(height: 20)
+                TitleGroup
+                Spacer()
+                TextfieldGroup
+                Spacer().frame(height: 75)
+                ButtonGroup
+                Spacer().frame(height: 35)
+                SocialLoginGroup
+                Spacer().frame(height: 39)
+                UmcGroup
+                Spacer().frame(height: 30)
+            }
         }
         .ignoresSafeArea()
         .padding(.horizontal, 16)
+        .fullScreenCover(isPresented: $isLoggedIn) {
+            TabBar()
+        }
     }
     
     // 하위뷰
@@ -49,10 +55,9 @@ struct LoginView: View {
     private var ButtonGroup: some View {
         VStack(spacing: 17) {
             Button(action: {
-                print("로그인")
-                id = viewModel.userInfo.id
-                pwd = viewModel.userInfo.pwd
-                username = "김미주"
+                if viewModel.userInfo.id == id && viewModel.userInfo.pwd == pwd {
+                    isLoggedIn = true
+                }
             }) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
@@ -68,6 +73,9 @@ struct LoginView: View {
             
             Button(action: {
                 print("회원가입")
+                id = viewModel.userInfo.id
+                pwd = viewModel.userInfo.pwd
+                username = "김미주"
             }) {
                 Text("회원가입")
                     .font(.medium13)
