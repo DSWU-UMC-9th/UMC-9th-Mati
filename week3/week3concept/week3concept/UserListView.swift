@@ -16,9 +16,8 @@ struct User: Identifiable {
 struct UserListView: View {
     @State private var userViewModel: UserViewModel = .init()
 
-    
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(userViewModel.users.indices, id: \.self) { index in
                     NavigationLink(destination: UserEditView(user: $userViewModel.users[index])) {
