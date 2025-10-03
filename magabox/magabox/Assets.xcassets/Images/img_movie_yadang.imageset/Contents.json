@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "img_movie_yadang.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

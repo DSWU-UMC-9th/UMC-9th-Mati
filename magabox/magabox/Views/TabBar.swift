@@ -11,7 +11,7 @@ struct TabBar: View {
     var body: some View {
         TabView {
             Tab("홈", systemImage: "house.fill") {
-                
+                HomeView()
             }
             
             Tab("바로 예매", systemImage: "play.tv") {

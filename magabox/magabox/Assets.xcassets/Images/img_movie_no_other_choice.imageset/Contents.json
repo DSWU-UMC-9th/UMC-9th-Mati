@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "img_movie_no_other_choice.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
