@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "img_megabox_logo.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

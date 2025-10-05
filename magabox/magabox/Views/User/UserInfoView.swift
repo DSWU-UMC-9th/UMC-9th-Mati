@@ -118,6 +118,7 @@ struct UserInfoView: View {
             makeStatus(title: "모바일 티켓", count: 0)
         }
         .padding(.vertical, 12)
+        .padding(.horizontal, 24)
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 8)
