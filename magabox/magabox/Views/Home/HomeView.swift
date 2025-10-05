@@ -24,16 +24,18 @@ struct HomeView: View {
     private var viewModel: HomeViewModel = .init()
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 0) {
-                Header
-                Spacer().frame(height: 9)
-                MovieCardSection
-                Spacer().frame(height: 37)
-                MovieFeedSection
+        NavigationStack {
+            ScrollView {
+                VStack(spacing: 0) {
+                    Header
+                    Spacer().frame(height: 9)
+                    MovieCardSection
+                    Spacer().frame(height: 37)
+                    MovieFeedSection
+                }
             }
+            .scrollIndicators(.hidden)
         }
-        .scrollIndicators(.hidden)
     }
     
     // MARK: - Section
@@ -75,7 +77,9 @@ struct HomeView: View {
                         : viewModel.comingSoonModel
                     
                     ForEach(movies) { movie in
-                        MovieCard(movie: movie)
+                        NavigationLink(destination: MovieDetailView(movie: movie)) {
+                            MovieCard(movie: movie)
+                        }
                     }
                 }
                 .padding(.horizontal, 16)
