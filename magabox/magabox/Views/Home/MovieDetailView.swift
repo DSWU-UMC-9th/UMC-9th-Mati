@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum MovieDetailTab {
+enum MovieDetailTab: CaseIterable {
     case info
     case review
     
@@ -21,8 +21,7 @@ enum MovieDetailTab {
 
 struct MovieDetailView: View {
     @State private var selectedTab: MovieDetailTab = .info
-    @State private var segmentSize: CGSize = .zero   // 세그먼트 실제 크기
-    @State private var contentSize: CGSize = .zero   // 전체 컨텐츠 크기(선택)
+    @Namespace private var tabNamespace
     
     let movie: MovieChartModel
     let viewModel: MovieDetailViewModel = .init()
@@ -55,8 +54,34 @@ struct MovieDetailView: View {
                     
                     // 세그먼트
                     HStack(spacing: 0) {
-                        makeSegmentButton(tab: .info)
-                        makeSegmentButton(tab: .review)
+                        ForEach(MovieDetailTab.allCases, id: \.self) { tab in
+                            Button(action: {
+                                selectedTab = tab
+                            }) {
+                                VStack {
+                                    Text(tab.title)
+                                        .font(.bold22)
+                                        .foregroundStyle(selectedTab == tab ? .black : .gray02)
+                                    ZStack {
+                                        Rectangle()
+                                            .fill(Color.clear)
+                                            .frame(height: 2)
+                                        
+                                        if selectedTab == tab {
+                                            Rectangle()
+                                                .fill(Color.black)
+                                                .frame(height: 2)
+                                                .matchedGeometryEffect(id: "Tab", in: tabNamespace)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .background(alignment: .bottom) {
+                        Rectangle()
+                            .fill(Color.gray02)
+                            .frame(height: 2)
                     }
                     
                     Spacer().frame(height: 8)
@@ -90,28 +115,11 @@ struct MovieDetailView: View {
                         }
                     }
                     .padding(.horizontal, 16)
+                    .padding(.bottom, 20)
                 }
             }
         }
         .navigationTitle(movie.title)
-    }
-    
-    // MARK: - Components
-    private func makeSegmentButton(tab: MovieDetailTab) -> some View {
-        let isSelected = (selectedTab == tab)
-        
-        return Button(action: {
-            selectedTab = tab
-        }) {
-            VStack {
-                Text(tab.title)
-                    .font(.bold22)
-                    .foregroundStyle(isSelected ? .black : .gray02)
-                Rectangle()
-                    .frame(height: 2)
-                    .foregroundStyle(isSelected ? .black : .gray02)
-            }
-        }
     }
 }
 
