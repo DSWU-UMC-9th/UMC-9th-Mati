@@ -23,14 +23,14 @@ struct MovieDetailView: View {
     @State private var selectedTab: MovieDetailTab = .info
     @Namespace private var tabNamespace
     
-    let movie: MovieChartModel
+    let movie: MovieModel
     let viewModel: MovieDetailViewModel = .init()
     
     var body: some View {
         ScrollView {
             VStack(spacing: 9) {
-                if let matchedMovie = viewModel.detailModel.first(where: { $0.titleKor == movie.title }) {
-                    matchedMovie.image
+                if let matchedMovie = viewModel.detailModel.first(where: { $0.titleKor == movie.titleKor }) {
+                    matchedMovie.detailImage
                         .resizable()
                         .scaledToFit()
                     
@@ -119,10 +119,10 @@ struct MovieDetailView: View {
                 }
             }
         }
-        .navigationTitle(movie.title)
+        .navigationTitle(movie.titleKor)
     }
 }
 
 #Preview {
-    MovieDetailView(movie: .init(poster: .init(.imgMovieF1), title: "F1 더 무비", count: "515만명"))
+    MovieDetailView(movie: .init(poster: .init(.imgMovieF1), titleKor: "F1 더 무비", count: "515만명"))
 }

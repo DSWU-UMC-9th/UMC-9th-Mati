@@ -8,13 +8,6 @@
 import Foundation
 import SwiftUI
 
-struct MovieChartModel: Identifiable {
-    let id = UUID()
-    let poster: Image
-    let title: String
-    let count: String
-}
-
 struct MovieFeedModel: Identifiable {
     let id = UUID()
     let image: Image

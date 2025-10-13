@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MovieCard: View {
-    let movie: MovieChartModel
+    let movie: MovieModel
     
     var body: some View {
         VStack(spacing: 8) {
@@ -33,7 +33,7 @@ struct MovieCard: View {
             
             VStack(alignment: .leading, spacing: 3) {
                 // 제목
-                Text(movie.title)
+                Text(movie.titleKor)
                     .font(.bold22)
                     .foregroundStyle(.black)
                 
@@ -48,5 +48,5 @@ struct MovieCard: View {
 }
 
 #Preview {
-    MovieCard(movie: .init(poster: .init(.imgMovieNoOtherChoice), title: "어쩔수가없다", count: "139만명"))
+    MovieCard(movie: .init(poster: .init(.imgMovieNoOtherChoice), titleKor: "어쩔수가없다", count: "139만명"))
 }

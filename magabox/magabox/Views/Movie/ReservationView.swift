@@ -12,12 +12,12 @@ enum Theater: String, CaseIterable {
 }
 
 struct ReservationView: View {
-    private let movie: MovieChartModel
+    private let movie: MovieModel
     
     @StateObject private var vm = ReservationViewModel()
     private var calendarVM = CalendarViewModel()
     
-    init(movie: MovieChartModel) {
+    init(movie: MovieModel) {
         self.movie = movie
     }
     
@@ -80,7 +80,7 @@ struct ReservationView: View {
                         )
                     
                     // 제목
-                    Text(movie.title)
+                    Text(movie.titleKor)
                         .font(.bold18)
                         .foregroundStyle(.black)
                 }
@@ -119,7 +119,7 @@ struct ReservationView: View {
                                 )
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 10)
-                                        .stroke(movie.title == vm.selectedMovie?.title ? .purple03 : .clear, lineWidth: 2)
+                                        .stroke(movie.titleKor == vm.selectedMovie?.titleKor ? .purple03 : .clear, lineWidth: 2)
                                 )
                         }
                     }
@@ -216,5 +216,5 @@ struct ReservationView: View {
 }
 
 #Preview {
-    ReservationView(movie: .init(poster: .init(.imgMovieNoOtherChoice), title: "어쩔수가없다", count: "139만명"))
+    ReservationView(movie: .init(poster: .init(.imgMovieNoOtherChoice), titleKor: "어쩔수가없다", count: "139만명"))
 }
