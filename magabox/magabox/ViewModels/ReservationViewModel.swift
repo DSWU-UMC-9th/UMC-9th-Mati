@@ -10,15 +10,7 @@ import Combine
 
 class ReservationViewModel: ObservableObject {
     // 영화 목록
-    let movieModel: [MovieModel] = [
-        .init(poster: .init(.imgMovieNoOtherChoice), titleKor: "어쩔수가없다", age: "15"),
-        .init(poster: .init(.imgMovieDemonSlayer), titleKor: "극장판 귀멸의 칼날: 무한성편", age: "15"),
-        .init(poster: .init(.imgMovieF1), titleKor: "F1 더 무비", age: "15"),
-        .init(poster: .init(.imgMovieMononoke), titleKor: "모노노케 히메", age: "ALL"),
-        .init(poster: .init(.imgMovieBoss), titleKor: "보스", age: "15"),
-        .init(poster: .init(.imgMovieYadang), titleKor: "야당: 익스텐디드 컷", age: "19"),
-        .init(poster: .init(.imgMovieTheRoses), titleKor: "더 로즈: 완벽한 이혼", age: "15")
-    ]
+    let movieModel: [MovieModel]
     
     // 상영관 목록
     let theaterModel: [TheaterModel] = [
@@ -67,7 +59,8 @@ class ReservationViewModel: ObservableObject {
     
     private var c = Set<AnyCancellable>()
     
-    init(initialMovie: MovieModel? = nil) {
+    init(movies: [MovieModel], initialMovie: MovieModel? = nil) {
+        self.movieModel = movies
         self.selectedMovie = initialMovie
         
         $selectedMovie

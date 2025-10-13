@@ -10,13 +10,13 @@ import Foundation
 @Observable
 class HomeViewModel {
     let movieModel: [MovieModel] = [
-        .init(poster: .init(.imgMovieNoOtherChoice), titleKor: "어쩔수가없다", count: "139만명"),
-        .init(poster: .init(.imgMovieDemonSlayer), titleKor: "극장판 귀멸의 칼날: 무한성편", count: "506만명"),
-        .init(poster: .init(.imgMovieF1), titleKor: "F1 더 무비", count: "515만명"),
-        .init(poster: .init(.imgMovieMononoke), titleKor: "모노노케 히메", count: "17만명"),
-        .init(poster: .init(.imgMovieBoss), titleKor: "보스", count: "5,269명"),
-        .init(poster: .init(.imgMovieYadang), titleKor: "야당: 익스텐디드 컷", count: "2.7만명"),
-        .init(poster: .init(.imgMovieTheRoses), titleKor: "더 로즈: 완벽한 이혼", count: "1.8만명")
+        .init(poster: .init(.imgMovieNoOtherChoice), titleKor: "어쩔수가없다", count: "139만명", age: "15"),
+        .init(poster: .init(.imgMovieDemonSlayer), titleKor: "극장판 귀멸의 칼날: 무한성편", count: "506만명", age: "15"),
+        .init(poster: .init(.imgMovieF1), titleKor: "F1 더 무비", count: "515만명", age: "15"),
+        .init(poster: .init(.imgMovieMononoke), titleKor: "모노노케 히메", count: "17만명", age: "ALL"),
+        .init(poster: .init(.imgMovieBoss), titleKor: "보스", count: "5,269명", age: "15"),
+        .init(poster: .init(.imgMovieYadang), titleKor: "야당: 익스텐디드 컷", count: "2.7만명", age: "19"),
+        .init(poster: .init(.imgMovieTheRoses), titleKor: "더 로즈: 완벽한 이혼", count: "1.8만명", age: "15")
     ]
     
     let comingSoonModel: [MovieModel] = []

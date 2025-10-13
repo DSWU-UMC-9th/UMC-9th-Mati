@@ -19,42 +19,21 @@ struct MovieModel: Identifiable {
     let age: String             // 관람 등급
     let date: String            // 개봉일
     
-    // 홈 화면 Init
-    init(poster: Image, titleKor: String, count: String) {
+    init(poster: Image = Image(""),
+         detailImage: Image = Image(""),
+         titleKor: String = "",
+         titleEng: String = "",
+         count: String = "",
+         description: String = "",
+         age: String = "",
+         date: String = "") {
         self.poster = poster
-        self.titleKor = titleKor
-        self.count = count
-        
-        self.detailImage = Image("")
-        self.titleEng = ""
-        self.description = ""
-        self.age = ""
-        self.date = ""
-    }
-    
-    // 상세 정보 Init
-    init(image: Image, titleKor: String, titleEng: String, description: String, age: String, date: String) {
-        self.detailImage = image
+        self.detailImage = detailImage
         self.titleKor = titleKor
         self.titleEng = titleEng
+        self.count = count
         self.description = description
         self.age = age
         self.date = date
-        
-        self.poster = Image("")
-        self.count = ""
-    }
-    
-    // 예매 Init
-    init(poster: Image, titleKor: String, age: String) {
-        self.poster = poster
-        self.titleKor = titleKor
-        self.age = age
-        
-        self.detailImage = Image("")
-        self.titleEng = ""
-        self.count = ""
-        self.description = ""
-        self.date = ""
     }
 }

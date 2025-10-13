@@ -12,13 +12,11 @@ enum Theater: String, CaseIterable {
 }
 
 struct ReservationView: View {
-    private let movie: MovieModel
-    
-    @StateObject private var vm = ReservationViewModel()
+    @StateObject private var vm: ReservationViewModel
     private var calendarVM = CalendarViewModel()
     
-    init(movie: MovieModel) {
-        self.movie = movie
+    init(movie: MovieModel, movies: [MovieModel]) {
+        _vm = StateObject(wrappedValue: ReservationViewModel(movies: movies, initialMovie: movie))
     }
     
     // MARK: - View
@@ -215,6 +213,6 @@ struct ReservationView: View {
     }
 }
 
-#Preview {
-    ReservationView(movie: .init(poster: .init(.imgMovieNoOtherChoice), titleKor: "어쩔수가없다", count: "139만명"))
-}
+//#Preview {
+//    ReservationView(movie: .init(poster: .init(.imgMovieNoOtherChoice), titleKor: "어쩔수가없다", count: "139만명", age: "15"))
+//}
