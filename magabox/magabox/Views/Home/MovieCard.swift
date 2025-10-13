@@ -18,9 +18,7 @@ struct MovieCard: View {
                 .frame(width: 148, height: 212)
             
             // 버튼
-            Button(action: {
-                print("예매하기")
-            }) {
+            NavigationLink(destination: ReservationView(movie: movie)) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 10)
                         .fill(.white)
