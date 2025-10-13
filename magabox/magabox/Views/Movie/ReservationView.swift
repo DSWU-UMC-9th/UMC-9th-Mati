@@ -15,8 +15,12 @@ struct ReservationView: View {
     @StateObject private var vm: ReservationViewModel
     private var calendarVM = CalendarViewModel()
     
+    @State private var showSheet: Bool = false
+    private let movies: [MovieModel]
+    
     init(movie: MovieModel, movies: [MovieModel]) {
         _vm = StateObject(wrappedValue: ReservationViewModel(movies: movies, initialMovie: movie))
+        self.movies = movies
     }
     
     // MARK: - View
@@ -46,6 +50,9 @@ struct ReservationView: View {
             }
         }
         .ignoresSafeArea()
+        .sheet(isPresented: $showSheet) {
+            MovieSearchView(movies: movies, reservationVM: vm)
+        }
     }
     
     // MARK: - Section
@@ -87,7 +94,7 @@ struct ReservationView: View {
                 
                 // 전체영화
                 Button(action: {
-                    print("전체영화")
+                    showSheet.toggle()
                 }) {
                     Text("전체영화")
                         .font(.semiBold14)
@@ -213,6 +220,7 @@ struct ReservationView: View {
     }
 }
 
-//#Preview {
+#Preview {
 //    ReservationView(movie: .init(poster: .init(.imgMovieNoOtherChoice), titleKor: "어쩔수가없다", count: "139만명", age: "15"))
-//}
+    HomeView()
+}
