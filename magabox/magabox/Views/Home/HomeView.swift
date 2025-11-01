@@ -78,7 +78,39 @@ struct HomeView: View {
                     
                     ForEach(movies) { movie in
                         NavigationLink(destination: MovieDetailView(movie: movie)) {
-                            MovieCard(movie: movie)
+                            VStack(spacing: 8) {
+                                // 포스터
+                                movie.poster
+                                    .resizable()
+                                    .frame(width: 148, height: 212)
+                                
+                                // 버튼
+                                NavigationLink(destination: ReservationView(movie: movie, movies: viewModel.movieModel)) {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .fill(.white)
+                                            .stroke(.purple03)
+                                            .frame(width: 148, height: 36)
+                                            
+                                        Text("바로 예매")
+                                            .font(.medium16)
+                                            .foregroundStyle(.purple03)
+                                    }
+                                }
+                                
+                                VStack(alignment: .leading, spacing: 3) {
+                                    // 제목
+                                    Text(movie.titleKor)
+                                        .font(.bold22)
+                                        .foregroundStyle(.black)
+                                    
+                                    // 누적관객수
+                                    Text("누적관객수 \(movie.count)")
+                                        .font(.medium18)
+                                        .foregroundStyle(.black)
+                                }
+                                .frame(width: 148, alignment: .leading)
+                            }
                         }
                     }
                 }
