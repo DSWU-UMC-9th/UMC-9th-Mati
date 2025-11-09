@@ -24,38 +24,46 @@ struct ReservationView: View {
     }
     
     // MARK: - View
+
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                TopSection
+        VStack(spacing: 0) {
+            TopSection
                 
-                MovieSelectSection
+            ScrollView {
+                VStack(spacing: 20) {
+                    MovieSelectSection
                 
-                TheaterSelectSection
+                    TheaterSelectSection
                 
-                CalendarView(viewModel: calendarVM, reservationViewModel: vm)
-                    .disabled(!vm.canSelectDay)
+                    CalendarView(viewModel: calendarVM, reservationViewModel: vm)
+                        .disabled(!vm.canSelectDay)
                 
-                Spacer().frame(height: 10)
+                    Spacer().frame(height: 10)
                 
-                if vm.showRoom {
-                    if !vm.isTodaySelected || vm.filteredTheaterModel.isEmpty {
-                        Text("선택한 극장에 상영시간표가 없습니다.")
-                            .font(.semiBold14)
-                            .foregroundStyle(.gray03)
-                    } else {
-                        TimeSelectSection
+                    if vm.showRoom {
+                        if vm.filteredTheaterModel.isEmpty {
+                            Text("선택한 극장에 상영시간표가 없습니다.")
+                                .font(.semiBold14)
+                                .foregroundStyle(.gray03)
+                        } else {
+                            TimeSelectSection
+                        }
                     }
                 }
+                .padding(.top, 20)
             }
         }
         .ignoresSafeArea()
         .sheet(isPresented: $showSheet) {
             MovieSearchView(movies: movies, reservationVM: vm)
         }
+        .task {
+            await vm.fetchMovies()
+        }
     }
     
     // MARK: - Section
+
     private var TopSection: some View {
         ZStack(alignment: .bottom) {
             Color.purple03
@@ -138,9 +146,11 @@ struct ReservationView: View {
     private var TheaterSelectSection: some View {
         HStack {
             ForEach(Theater.allCases, id: \.self) { theater in
-                let isSelected = vm.selectedTheater == theater.rawValue
+                let name = theater.rawValue
+                let isSelected = vm.selectedTheaters.contains(name)
+                
                 Button(action: {
-                    vm.selectedTheater = theater.rawValue
+                    vm.toggleTheater(name)
                 }) {
                     Text(theater.rawValue)
                         .font(.semiBold16)
